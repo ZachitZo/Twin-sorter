@@ -1,0 +1,21 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: none;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, ul {
+  margin: 0;
+  padding: 0;
+}
