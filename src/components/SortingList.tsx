@@ -7,7 +7,7 @@ import buttonStyles from '../styles/module/ButtonStyles.module.scss'
 
 interface SortingListProps {
     elements: Array<string>,
-    addFn: (elements: Array<string>) => void,
+    setFn: (elements: Array<string>) => void,
 }
 
 const SortingList = (props: SortingListProps) => {
@@ -17,25 +17,48 @@ const SortingList = (props: SortingListProps) => {
         if (elementsData.elements.length) {
             const addedElement = elementsData.elements[elementsData.elements.length - 1];
 
-            props.addFn([...props.elements, addedElement]);
+            props.setFn([...props.elements, addedElement]);
             elementsData.setElements(elementsData.elements.slice(0, -1));
         }
+    };
+
+    const deleteElement = (element: string): void => {
+      props.setFn([...props.elements.filter(el => el !== element)]);
+      elementsData.setElements([...elementsData.elements, element]);
     };
 
     return (
         <div className={sortingListStyles.sortingListContainer}>
             <button
-                className={buttonStyles.button}
+                className={`${buttonStyles.button} ${buttonStyles.actionBtn}`}
                 onClick={addElement}
+                disabled={!elementsData.elements.length}
             >
                 Добавить
             </button>
             <div className={listStyles.listContainer}>
-                <ul className={listStyles.list}>
-                    {props.elements.map((el, idx) => <li key={idx}>{el}</li>)}
-                </ul>
+                {
+                    props.elements.length
+                        ? <ul className={listStyles.list}>
+                            {props.elements.map((el, idx) =>
+                                <li key={idx} className={listStyles.sortedItem}>
+                                    <span>{el}</span>
+                                    <span>
+                                        <button
+                                          className={`${buttonStyles.button} ${buttonStyles.deleteBtn}`}
+                                          onClick={() => deleteElement(el)}
+                                        >
+                                            &#10006;
+                                        </button>
+                                    </span>
+                                </li>
+                            )}
+                        </ul>
+                        : <span className={listStyles.empty}>Список пуст...</span>
+                }
+
                 <div className={listStyles.description}>
-                    Количество элементов: {props.elements.length}
+                    <b>Кол-во элементов: {props.elements.length}</b>
                 </div>
             </div>
         </div>

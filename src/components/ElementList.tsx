@@ -12,12 +12,14 @@ const ElementList = () => {
             {
                 elementsData.elements.length
                     ? <ul className={listStyles.list}>
-                        {elementsData.elements.map((el, idx) => <li key={idx}>{el}</li>)}
+                        {elementsData.elements.map((el, idx) =>
+                          <li key={idx}>{el}</li>
+                        )}
                     </ul>
-                    : <span>Список пуст</span>
+                    : <span className={listStyles.empty}>Список пуст...</span>
             }
             <div className={listStyles.description}>
-                Начальное количество элементов: {elementsStartCount}
+                <b>Начальное кол-во элементов: {elementsStartCount}</b>
             </div>
         </div>
     )

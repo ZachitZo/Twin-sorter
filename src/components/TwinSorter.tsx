@@ -30,16 +30,18 @@ const TwinSorter = () => {
             <SortingList
                 key="left"
                 elements={leftListElements}
-                addFn={setLeftListElements}
+                setFn={setLeftListElements}
             />
             <SortingActions
                 moveRight={moveElementToRight}
                 moveLeft={moveElementToLeft}
+                rightElements={rightListElements}
+                leftElements={leftListElements}
             />
             <SortingList
                 key="right"
                 elements={rightListElements}
-                addFn={setRightListElements}
+                setFn={setRightListElements}
             />
         </div>
     )
